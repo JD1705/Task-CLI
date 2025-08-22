@@ -3,7 +3,7 @@ import os
 import datetime as dt
 import json
 
-path = os.path.join("tasks", "data.json")
+path = "data.json"
 
 json_file = []
 index = len(json_file) + 1
@@ -43,6 +43,29 @@ if len(sys.argv) > 1:
                 file.close()
 
             print("Task added successfully!")
+    elif command == "update" and len(sys.argv) > 3:
+        if os.path.exists(path):
+            id = int(sys.argv[2])
+            task = sys.argv[3]
+
+            with open(path, "r") as file:
+                json_file = json.load(file)
+                file.close()
+
+            json_file[id-1].update({
+                "desc":task,
+                "updatedAt":str(dt.datetime.now(dt.timezone.utc))
+                })
+            
+            with open(path, "w") as file:
+                file.writelines(json.dumps(json_file, indent=4))
+                file.close()
+
+            print("Task updated successfully!")
+        else:
+            print("There's no file to update")
+
+
 
 else:
     run = True
@@ -65,7 +88,7 @@ else:
                     "updatedAt":f"{dt.datetime.now(dt.timezone.utc)}"
                     })
 
-            with open(f"tasks/{name}.json", "w") as file:
+            with open(f"{name}.json", "w") as file:
                 file.writelines(json.dumps(json_file, indent=4))
                 print("Task added successfully!\n")
                 file.close()
@@ -85,7 +108,7 @@ else:
                         "updatedAt":f"{dt.datetime.now(dt.timezone.utc)}"
                         })
 
-                    with open(f"tasks/{name}.json", "w") as file:
+                    with open(f"{name}.json", "w") as file:
                         file.writelines(json.dumps(json_file,  indent=4))
                         file.close()
             
