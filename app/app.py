@@ -52,23 +52,28 @@ if len(sys.argv) > 1:
                 json_file = json.load(file)
                 file.close()
 
-            json_file[id-1].update({
-                "desc":task,
-                "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                })
-            
-            with open(path, "w") as file:
-                file.writelines(json.dumps(json_file, indent=4))
-                file.close()
+            for i in json_file:
+                if i["id"] == id:
+                    i.update({
+                        "desc":task,
+                        "updatedAt":str(dt.datetime.now(dt.timezone.utc))
+                        })
+                    with open(path, "w") as file:
+                        file.writelines(json.dumps(json_file, indent=4))
+                        file.close()
+                    print("Task updated successfully!")
+                    break
+            else:
+                print("Task id not found")
 
-            print("Task updated successfully!")
         else:
             print("There's no file to update")
     
     elif command == "list":
         with open(path, 'r') as file:
             json_file = json.load(file)
-            for i in json_file: print(f"task id: {i["id"]}\ntask description: {i["desc"]}\n")
+            for i in json_file:
+                print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
             file.close()
 
 
