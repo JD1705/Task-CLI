@@ -75,7 +75,23 @@ if len(sys.argv) > 1:
             for i in json_file:
                 print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
             file.close()
+    elif command == "delete" and len(sys.argv) > 2:
+        id = int(sys.argv[2])
 
+        with open(path, "r") as file:
+            json_file = json.load(file)
+            file.close()
+
+        for i in json_file:
+            if i["id"] == id:
+                json_file.pop(json_file.index(i))
+                with open(path, "w") as file:
+                    file.writelines(json.dumps(json_file, indent=4))
+                    file.close()
+                print("Task Deleted")
+                break
+        else:
+            print("Task id not found")
 
 else:
     print("not enough arguments to execute this command")
