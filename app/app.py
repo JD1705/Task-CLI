@@ -2,11 +2,20 @@ import sys
 import os
 import datetime as dt
 import json
+from random import randint
+
+def id_generator() -> str:
+    letters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+
+    id = ""
+    while len(id) < 5:
+        id += letters[randint(0,len(letters)-1)]
+
+    return id
 
 path = "data.json"
 
 json_file = []
-index = len(json_file) + 1
 if len(sys.argv) > 1:
     command = sys.argv[1]
     if command == "add" and len(sys.argv) > 2:
@@ -17,7 +26,7 @@ if len(sys.argv) > 1:
                 file.close()
 
             json_file.append({
-                "id":len(json_file)+1,
+                "id":id_generator(),
                 "desc":task,
                 "status":"to-do",
                 "createdAt":str(dt.datetime.now(dt.timezone.utc)),
@@ -31,7 +40,7 @@ if len(sys.argv) > 1:
             print("Task added successfully!")
         else:
             json_file.append({
-                "id":index,
+                "id":id_generator(),
                 "desc":task,
                 "status":"to-do",
                 "createdAt":str(dt.datetime.now(dt.timezone.utc)),
@@ -45,7 +54,7 @@ if len(sys.argv) > 1:
             print("Task added successfully!")
     elif command == "update" and len(sys.argv) > 3:
         if os.path.exists(path):
-            id = int(sys.argv[2])
+            id = str(sys.argv[2])
             task = sys.argv[3]
 
             with open(path, "r") as file:
@@ -77,7 +86,7 @@ if len(sys.argv) > 1:
             file.close()
 
     elif command == "delete" and len(sys.argv) > 2:
-        id = int(sys.argv[2])
+        id = str(sys.argv[2])
 
         with open(path, "r") as file:
             json_file = json.load(file)
@@ -95,7 +104,7 @@ if len(sys.argv) > 1:
             print("Task id not found")
 
     elif command == "mark-done" and len(sys.argv) > 2:
-        id = int(sys.argv[2])
+        id = str(sys.argv[2])
 
         with open(path, "r") as file:
                 json_file = json.load(file)
