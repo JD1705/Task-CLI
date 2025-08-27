@@ -157,5 +157,19 @@ if len(sys.argv) > 1:
         for i in to_do_tasks:
                 print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
 
+    elif command == "list-in-process" and len(sys.argv) > 1:
+        to_do_tasks = []
+
+        with open(path, "r") as file:
+                json_file = json.load(file)
+                file.close()
+
+        for i in json_file:
+            if i["status"] == "in-process":
+                to_do_tasks.append(i)
+        
+        for i in to_do_tasks:
+                print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
+
 else:
     print("not enough arguments to execute this command")
