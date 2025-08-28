@@ -13,6 +13,21 @@ def id_generator() -> str:
 
     return id
 
+def show_help():
+    print("Task-CLI manager\n")
+    print("Commands:\n")
+    print("help -> show commands\n")
+    print("add [task] -> add a new task")
+    print("update [id] [task] -> change task description")
+    print("delete [id] [task] -> delete a task\n")
+    print("list -> list all tasks\n")
+    print("list-to-do -> list all tasks with state to-do")
+    print("list-in-process -> list all tasks with state in-process")
+    print("list-done -> list all tasks with state done\n")
+    print("mark-done [id] -> mark task as done")
+    print("mark-in-process [id] -> mark task as in-process\n")
+    print("use example -> task-cli add \"example task\"")
+
 path = "data.json"
 
 json_file = []
@@ -184,6 +199,9 @@ if len(sys.argv) > 1:
         
         for i in to_do_tasks:
                 print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
+
+    elif command == "help":
+        show_help()
 
 else:
     print("not enough arguments to execute this command")
