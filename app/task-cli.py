@@ -79,7 +79,7 @@ if len(sys.argv) > 1:
             for i in json_file:
                 if i["id"] == id:
                     i.update({
-                        "desc":task,
+                        "desc":task, 
                         "updatedAt":str(dt.datetime.now(dt.timezone.utc))
                         })
                     with open(path, "w") as file:
@@ -128,7 +128,8 @@ if len(sys.argv) > 1:
         for i in json_file:
             if i["id"] == id:
                 i.update({
-                    "status":"done",
+                    "status":"done",  
+                    "updatedAt":str(dt.datetime.now(dt.timezone.utc))
                     })
                 with open(path, "w") as file:
                     file.writelines(json.dumps(json_file, indent=4))
@@ -149,6 +150,7 @@ if len(sys.argv) > 1:
             if i["id"] == id:
                 i.update({
                     "status":"in-process",
+                    "updatedAt":str(dt.datetime.now(dt.timezone.utc))
                     })
                 with open(path, "w") as file:
                     file.writelines(json.dumps(json_file, indent=4))
