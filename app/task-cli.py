@@ -1,5 +1,5 @@
 import sys
-from services import create_new_task, id_generator, show_help, update_task
+from services import create_new_task, id_generator, lists_task, show_help, update_task
 import os
 import datetime as dt
 import json
@@ -37,11 +37,7 @@ if len(sys.argv) > 1:
             print("There's no file to update")
     
     elif command == "list":
-        with open(path, 'r') as file:
-            json_file = json.load(file)
-            for i in json_file:
-                print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
-            file.close()
+        lists_task(path)
 
     elif command == "delete" and len(sys.argv) > 2:
         id = str(sys.argv[2])
