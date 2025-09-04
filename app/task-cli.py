@@ -55,24 +55,8 @@ if len(sys.argv) > 1:
 
     elif command == "mark-done" and len(sys.argv) > 2:
         id = str(sys.argv[2])
-
-        with open(path, "r") as file:
-                json_file = json.load(file)
-                file.close()
-
-        for i in json_file:
-            if i["id"] == id:
-                i.update({
-                    "status":"done",  
-                    "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                    })
-                with open(path, "w") as file:
-                    file.writelines(json.dumps(json_file, indent=4))
-                    file.close()
-                print("Task marked successfully!")
-                break
-        else:
-            print("Task id not found")
+        state = "done"
+        mark_tasks(path, id, state)
 
     elif command == "mark-in-process" and len(sys.argv) > 2:
         id = str(sys.argv[2])
