@@ -1,5 +1,5 @@
 import sys
-from services import create_new_task, id_generator, show_help
+from services import create_new_task, id_generator, show_help, update_task
 import os
 import datetime as dt
 import json
@@ -26,22 +26,10 @@ if len(sys.argv) > 1:
         if os.path.exists(path):
             id = str(sys.argv[2])
             task = sys.argv[3]
-
-            with open(path, "r") as file:
-                json_file = json.load(file)
-                file.close()
-
-            for i in json_file:
-                if i["id"] == id:
-                    i.update({
-                        "desc":task, 
-                        "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                        })
-                    with open(path, "w") as file:
-                        file.writelines(json.dumps(json_file, indent=4))
-                        file.close()
-                    print("Task updated successfully!")
-                    break
+            
+            result = update_task(path, id, task)
+            if result == True:
+                print("Task updated")
             else:
                 print("Task id not found")
 
