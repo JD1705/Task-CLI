@@ -1,32 +1,8 @@
 import sys
+from services import id_generator, show_help
 import os
 import datetime as dt
 import json
-from random import randint
-
-def id_generator() -> str:
-    letters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
-
-    id = ""
-    while len(id) < 5:
-        id += letters[randint(0,len(letters)-1)]
-
-    return id
-
-def show_help():
-    print("Task-CLI manager\n")
-    print("Commands:\n")
-    print("help -> show commands\n")
-    print("add [task] -> add a new task")
-    print("update [id] [task] -> change task description")
-    print("delete [id] [task] -> delete a task\n")
-    print("list -> list all tasks\n")
-    print("list-to-do -> list all tasks with state to-do")
-    print("list-in-process -> list all tasks with state in-process")
-    print("list-done -> list all tasks with state done\n")
-    print("mark-done [id] -> mark task as done")
-    print("mark-in-process [id] -> mark task as in-process\n")
-    print("use example -> task-cli add \"example task\"")
 
 path = "data.json"
 
