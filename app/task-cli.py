@@ -1,5 +1,5 @@
 import sys
-from services import create_new_task, delete_task, id_generator, lists_task, show_help, update_task
+from services import create_new_task, delete_task, id_generator, lists_task, mark_tasks, show_help, update_task
 import os
 import datetime as dt
 import json
@@ -47,6 +47,11 @@ if len(sys.argv) > 1:
             print("Task deleted")
         else:
             print("Task id not found")
+    
+    elif command == "mark-to-do" and len(sys.argv) > 2:
+        id = str(sys.argv[2])
+        state = "to-do"
+        mark_tasks(path, id, state)
 
     elif command == "mark-done" and len(sys.argv) > 2:
         id = str(sys.argv[2])
