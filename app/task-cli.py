@@ -72,18 +72,8 @@ if len(sys.argv) > 1:
         lists_task(path, state)
 
     elif command == "list-done" and len(sys.argv) > 1:
-        to_do_tasks = []
-
-        with open(path, "r") as file:
-                json_file = json.load(file)
-                file.close()
-
-        for i in json_file:
-            if i["status"] == "done":
-                to_do_tasks.append(i)
-        
-        for i in to_do_tasks:
-                print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
+        state = "done"
+        lists_task(path, state)
 
     elif command == "help":
         show_help()
