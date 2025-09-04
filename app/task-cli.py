@@ -2,7 +2,6 @@ import sys
 from services import create_new_task, delete_task, id_generator, lists_task, mark_tasks, show_help, update_task
 import os
 import datetime as dt
-import json
 
 path = "data.json"
 
