@@ -1,5 +1,5 @@
 import sys
-from services import id_generator, show_help
+from services import create_new_task, id_generator, show_help
 import os
 import datetime as dt
 import json
@@ -11,38 +11,17 @@ if len(sys.argv) > 1:
     command = sys.argv[1]
     if command == "add" and len(sys.argv) > 2:
         task = str(sys.argv[2])
-        if os.path.exists(path):
-            with open(path, "r") as file:
-                json_file = json.load(file)
-                file.close()
+        file = {
+            "id":id_generator(),
+            "desc":task,
+            "status":"to-do",
+            "createdAt":str(dt.datetime.now(dt.timezone.utc)),
+            "updatedAt":str(dt.datetime.now(dt.timezone.utc))
+            }
 
-            json_file.append({
-                "id":id_generator(),
-                "desc":task,
-                "status":"to-do",
-                "createdAt":str(dt.datetime.now(dt.timezone.utc)),
-                "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                })
+        result = create_new_task(path, file)
+        print(f"Task added successfully with id: {result}")
 
-            with open(path, "w") as file:
-                file.writelines(json.dumps(json_file, indent=4))
-                file.close()
-
-            print("Task added successfully!")
-        else:
-            json_file.append({
-                "id":id_generator(),
-                "desc":task,
-                "status":"to-do",
-                "createdAt":str(dt.datetime.now(dt.timezone.utc)),
-                "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                })
-        
-            with open(path, "w") as file:
-                file.writelines(json.dumps(json_file, indent=4))
-                file.close()
-
-            print("Task added successfully!")
     elif command == "update" and len(sys.argv) > 3:
         if os.path.exists(path):
             id = str(sys.argv[2])
