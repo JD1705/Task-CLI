@@ -60,33 +60,40 @@ def create_new_task(path: str, task: dict) -> str:
 
         return task["id"]
 
-def lists_task(path: str, status = None) -> None:
-    if os.path.exists(path):
-        if status == None:
-            json_file = read_file(path)
-            for i in json_file:
-                print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
-        
-        elif status == "to-do":
-            json_file = read_file(path)
+def list_tasks_done(path: str) -> list:
+    done_list = []
+    json_file = read_file(path)
 
-            for i in json_file:
-                if i["status"] == status:
-                    print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
+    for i in json_file:
+        if i["status"] == "done":
+            done_list.append(i)
 
-        elif status == "in-process":
-            json_file = read_file(path)
+    return done_list
 
-            for i in json_file:
-                if i["status"] == status:
-                    print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
+def list_tasks_todo(path: str) -> list:
+    todo_list = []
+    json_file = read_file(path)
 
-        elif status == "done":
-            json_file = read_file(path)
+    for i in json_file:
+        if i["status"] == "to-do":
+            todo_list.append(i)
 
-            for i in json_file:
-                if i["status"] == status:
-                    print(f"task id: {i["id"]}\ntask description: {i["desc"]}\ntask status: {i["status"]}\ntask creation date: {i["createdAt"]}\ntask update date: {i["updatedAt"]}\n")
+    return todo_list
+
+def list_tasks_inprocess(path: str) -> list:
+    inprocess_list = []
+    json_file = read_file(path)
+
+    for i in json_file:
+        if i["status"] == "in-process":
+            inprocess_list.append(i)
+
+    return inprocess_list
+
+def lists_task(path: str) -> list:
+    json_file = read_file(path)
+
+    return json_file
 
 def mark_tasks(path: str, id: str, status: str) -> None:
     if os.path.exists(path):
