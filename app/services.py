@@ -95,52 +95,20 @@ def lists_task(path: str) -> list:
 
     return json_file
 
-def mark_tasks(path: str, id: str, status: str) -> None:
-    if os.path.exists(path):
-        if status == "to-do":
-            json_file = read_file(path)
+def mark_tasks(path: str, id: str, status: str) -> bool:
+    json_file = read_file(path)
+    
+    for i in json_file:
+        if i["id"] == id:
+            i.update({
+                "status":status,
+                "updatedAt":str(dt.datetime.now(dt.timezone.utc))
+                })
+            write_file(path, json_file)
+            return True
 
-            for i in json_file:
-                if i["id"] == id:
-                    i.update({
-                        "status":status,
-                        "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                        })
-                    write_file(path, json_file)
-                    print("Task marked successfully!")
-                    break
-            else:
-                print("Task id not found")
-
-        elif status == "in-process":
-            json_file = read_file(path)
-
-            for i in json_file:
-                if i["id"] == id:
-                    i.update({
-                        "status":status,
-                        "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                        })
-                    write_file(path, json_file)
-                    print("Task marked successfully!")
-                    break
-            else:
-                print("Task id not found")
-
-        elif status == "done":
-            json_file = read_file(path)
-
-            for i in json_file:
-                if i["id"] == id:
-                    i.update({
-                        "status":status,
-                        "updatedAt":str(dt.datetime.now(dt.timezone.utc))
-                        })
-                    write_file(path, json_file)
-                    print("Task marked successfully!")
-                    break
-            else:
-                print("Task id not found")
+    else:
+        return False
 
 def delete_task(path: str, id: str) -> bool:
     json_file = read_file(path)
