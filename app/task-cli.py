@@ -1,5 +1,5 @@
 import sys
-from services import create_new_task, delete_task, id_generator, lists_task, mark_tasks, show_help, update_task
+from services import create_new_task, delete_task, list_tasks_todo, id_generator, list_tasks_done, list_tasks_inprocess, lists_task, mark_tasks, show_help, update_task
 import os
 import datetime as dt
 
@@ -64,15 +64,15 @@ if len(sys.argv) > 1:
 
     elif command == "list-to-do" and len(sys.argv) > 1:
         state = "to-do"
-        lists_task(path, state)
+        list_tasks_todo(path)
 
     elif command == "list-in-process" and len(sys.argv) > 1:
         state = "in-process"
-        lists_task(path, state)
+        list_tasks_inprocess(path)
 
     elif command == "list-done" and len(sys.argv) > 1:
         state = "done"
-        lists_task(path, state)
+        list_tasks_done(path)
 
     elif command == "help":
         show_help()
