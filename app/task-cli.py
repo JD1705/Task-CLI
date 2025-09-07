@@ -36,7 +36,10 @@ if len(sys.argv) > 1:
             print("There's no file to update")
     
     elif command == "list":
-        lists_task(path)
+        result = lists_task(path)
+
+        for i in result:
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}\n")
 
     elif command == "delete" and len(sys.argv) > 2:
         id = str(sys.argv[2])
@@ -82,19 +85,19 @@ if len(sys.argv) > 1:
         result_list = list_tasks_todo(path)
         
         for i in result_list:
-            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}")
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}\n")
 
     elif command == "list-in-process" and len(sys.argv) > 1:
         result_list = list_tasks_inprocess(path)
 
         for i in result_list:
-            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}")
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}\n")
 
     elif command == "list-done" and len(sys.argv) > 1:
         result_list = list_tasks_done(path)
 
         for i in result_list:
-            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}")
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}\n")
 
     elif command == "help":
         show_help()
