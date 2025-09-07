@@ -63,13 +63,22 @@ if len(sys.argv) > 1:
         mark_tasks(path, id, state)
 
     elif command == "list-to-do" and len(sys.argv) > 1:
-        list_tasks_todo(path)
+        result_list = list_tasks_todo(path)
+        
+        for i in result_list:
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}")
 
     elif command == "list-in-process" and len(sys.argv) > 1:
-        list_tasks_inprocess(path)
+        result_list = list_tasks_inprocess(path)
+
+        for i in result_list:
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}")
 
     elif command == "list-done" and len(sys.argv) > 1:
-        list_tasks_done(path)
+        result_list = list_tasks_done(path)
+
+        for i in result_list:
+            print(f"id: {i["id"]}\ndesc: {i["desc"]}\nstate: {i["status"]}\ncreated at: {i["createdAt"]}\nlast update: {i["updatedAt"]}")
 
     elif command == "help":
         show_help()
