@@ -50,17 +50,33 @@ if len(sys.argv) > 1:
     elif command == "mark-to-do" and len(sys.argv) > 2:
         id = str(sys.argv[2])
         state = "to-do"
-        mark_tasks(path, id, state)
+        result = mark_tasks(path, id, state)
+
+        if result:
+            print("Task marked successfully!")
+        else:
+            print("Task not found")
+
 
     elif command == "mark-done" and len(sys.argv) > 2:
         id = str(sys.argv[2])
         state = "done"
-        mark_tasks(path, id, state)
+        result = mark_tasks(path, id, state)
+
+        if result:
+            print("Task marked successfully!")
+        else:
+            print("Task not found")
 
     elif command == "mark-in-process" and len(sys.argv) > 2:
         id = str(sys.argv[2])
         state = "in-process"
-        mark_tasks(path, id, state)
+        result = mark_tasks(path, id, state)
+
+        if result:
+            print("Task marked successfully!")
+        else:
+            print("Task not found")
 
     elif command == "list-to-do" and len(sys.argv) > 1:
         result_list = list_tasks_todo(path)
