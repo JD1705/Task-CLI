@@ -13,6 +13,7 @@ def test_id_lenght(mocker):
     result = id_generator()
 
     assert len(result) == 5
+    assert mock_randint.call_count == 5
 
 def test_id_type_is_string(mocker):
     
