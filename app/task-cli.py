@@ -5,7 +5,6 @@ import datetime as dt
 
 path = "data.json"
 
-json_file = []
 if len(sys.argv) > 1:
     command = sys.argv[1]
     if command == "add" and len(sys.argv) > 2:
