@@ -25,7 +25,7 @@ def show_help():
     print("help -> show commands\n")
     print("add [task] -> add a new task")
     print("update [id] [task] -> change task description")
-    print("delete [id] [task] -> delete a task\n")
+    print("delete [id] -> delete a task\n")
     print("list -> list all tasks\n")
     print("list-to-do -> list all tasks with state to-do")
     print("list-in-process -> list all tasks with state in-process")
